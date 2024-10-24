@@ -1,7 +1,8 @@
 import { readFileSync } from "fs";
 import path from "path";
+import type { Data } from "../types";
 
-const loadJsonData = (filepath: string): Record<string, unknown> | void => {
+const loadJsonData = (filepath: string): Data | void => {
   try {
     const filePath = path.resolve(filepath);
     const jsonData = readFileSync(filePath, "utf-8");
