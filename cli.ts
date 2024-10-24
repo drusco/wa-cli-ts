@@ -1,3 +1,5 @@
+import loadData from "./utils/loadData";
+
 const VALID_ACTIONS = ["analyze"];
 
 async function app(): Promise<void> {
@@ -19,7 +21,7 @@ async function app(): Promise<void> {
 }
 
 async function analyze(args: string[]): Promise<void> {
-  console.log(args);
+  console.log(args, loadData("dicts/data.jsn"));
 }
 
 app();
