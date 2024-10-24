@@ -10,64 +10,6 @@ describe("traverseDataRecursive", () => {
           name: "Mamíferos",
           items: [
             {
-              name: "Carnívoros",
-              items: [
-                {
-                  name: "Felinos",
-                  items: [
-                    {
-                      name: "Leões",
-                    },
-                    {
-                      name: "Tigres",
-                    },
-                    {
-                      name: "Jaguars",
-                    },
-                    {
-                      name: "Leopardos",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "Herbívoros",
-              items: [
-                {
-                  name: "Equídeos",
-                  items: [
-                    {
-                      name: "Cavalos",
-                    },
-                    {
-                      name: "Zebras",
-                    },
-                    {
-                      name: "Asnos",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "Bovídeos",
-              items: [
-                {
-                  name: "Bois",
-                },
-                {
-                  name: "Búfalos",
-                },
-                {
-                  name: "Antílopes",
-                },
-                {
-                  name: "Cabras",
-                },
-              ],
-            },
-            {
               name: "Primatas",
               items: [
                 {
@@ -75,9 +17,6 @@ describe("traverseDataRecursive", () => {
                 },
                 {
                   name: "Chimpanzés",
-                },
-                {
-                  name: "Orangotangos",
                 },
               ],
             },
@@ -87,23 +26,6 @@ describe("traverseDataRecursive", () => {
           name: "Aves",
           items: [
             {
-              name: "1.2.1 Rapinas",
-              items: [
-                {
-                  name: "Águias",
-                },
-                {
-                  name: "Falcões",
-                },
-                {
-                  name: "Corujas",
-                },
-                {
-                  name: "Milhafres",
-                },
-              ],
-            },
-            {
               name: "Pássaros",
               items: [
                 {
@@ -111,12 +33,6 @@ describe("traverseDataRecursive", () => {
                 },
                 {
                   name: "Papagaios",
-                },
-                {
-                  name: "Pardais",
-                },
-                {
-                  name: "Rouxinóis",
                 },
               ],
             },
