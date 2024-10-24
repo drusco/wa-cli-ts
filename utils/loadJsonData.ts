@@ -6,11 +6,7 @@ const loadJsonData = (filepath: string): Record<string, unknown> | void => {
     const filePath = path.resolve(filepath);
     const jsonData = readFileSync(filePath, "utf-8");
     return JSON.parse(jsonData);
-  } catch (error: any) {
-    if (error) {
-      console.error(error.message, error.path);
-    }
-  }
+  } catch (error: any) {}
 };
 
 export default loadJsonData;
