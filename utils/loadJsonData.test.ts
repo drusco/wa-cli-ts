@@ -5,7 +5,7 @@ import loadJsonData from "./loadJsonData";
 jest.mock("fs");
 jest.mock("path");
 
-describe("loadJsonData utility", () => {
+describe("loadJsonData", () => {
   const mockFilePath = "dicts/data.json";
   const mockResolvedPath = "/path/to/dicts/data.json";
   const mockJsonData = JSON.stringify({
