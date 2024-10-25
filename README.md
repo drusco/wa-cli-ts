@@ -26,7 +26,7 @@ bun run cli.ts analyze –depth <n> –verbose (optional) "{phrase}"
 
 ### Parâmetros
 
-<table><tbody><tr><td>analyze</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>--depth</td><td>number</td><td>&nbsp;número inteiro maior que zero.</td></tr><tr><td>--verbose</td><td>opcional</td><td>&nbsp;mostra o tempo de carregamento dos parâmetros e da verificação da frase.</td></tr><tr><td>"phrase"</td><td>string</td><td>&nbsp;o texto que será usado para comparar com as informações do arquivo dicts/data.json</td></tr></tbody></table>
+<table><tbody><tr><td>analyze &nbsp; &nbsp; &nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>--depth</td><td>number</td><td>&nbsp;número inteiro maior que zero.</td></tr><tr><td>--verbose</td><td>opcional</td><td>&nbsp;mostra o tempo de carregamento dos parâmetros e da verificação da frase.</td></tr><tr><td>"phrase"</td><td>string</td><td>&nbsp;o texto que será usado para comparar com as informações do arquivo dicts/data.json</td></tr></tbody></table>
 
 ### Formato do JSON
 
