@@ -80,4 +80,15 @@ describe("traverseData", () => {
       Pássaros: 1,
     });
   });
+
+  test("handles large phrase correctly", () => {
+    const mockData = [{ name: "parent", items: [{ name: "child" }] }];
+    const phrase = "a".repeat(5000) + " child";
+
+    const results = traverseData(mockData, 1, phrase);
+
+    expect(results).toEqual({
+      parent: 1,
+    });
+  });
 });

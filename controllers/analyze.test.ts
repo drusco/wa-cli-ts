@@ -1,9 +1,7 @@
 import analyze from "../controllers/analyze";
 import loadJsonData from "../utils/loadJsonData";
-import traverseData from "../utils/traverseData";
 
 jest.mock("../utils/loadJsonData");
-jest.mock("../utils/traverseData");
 
 describe("analyze", () => {
   const usageGuide = 'bun run cli.ts analyze -depth 2 -verbose "phrase"';
@@ -57,32 +55,29 @@ describe("analyze", () => {
     );
   });
 
-  test("should call loadJsonData and traverseData with correct parameters", () => {
+  test("should call loadJsonData with correct parameters", () => {
     const mockData = [{ name: "animais" }];
     (loadJsonData as jest.Mock).mockReturnValue({ data: mockData });
-    (traverseData as jest.Mock).mockReturnValue({ result1: 1, result2: 2 });
 
     analyze(["-depth", "2", "phrase"]);
 
     expect(loadJsonData).toHaveBeenCalledWith("./dicts/data.json");
-    expect(traverseData).toHaveBeenCalledWith(mockData, 2, "phrase");
   });
 
   test("should print results from traverseData", () => {
-    (traverseData as jest.Mock).mockReturnValue({ result1: 1, result2: 2 });
+    const mockData = [{ name: "animais", items: [{ name: "carnivoros" }] }];
+    (loadJsonData as jest.Mock).mockReturnValue({ data: mockData });
 
-    analyze(["-depth", "2", "phrase"]);
+    analyze(["-depth", "1", "carnivoros"]);
 
     expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("result1 = 1;")
-    );
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("result2 = 2;")
+      expect.stringContaining("animais = 1;")
     );
   });
 
   test("should print '0' when traverseData returns an empty result", () => {
-    (traverseData as jest.Mock).mockReturnValue({});
+    const mockData = [{ name: "animais", items: [{ name: "carnivoros" }] }];
+    (loadJsonData as jest.Mock).mockReturnValue({ data: mockData });
 
     analyze(["-depth", "2", "phrase"]);
 
@@ -115,16 +110,26 @@ describe("analyze", () => {
     );
   });
 
-  test("should use an empty array when loadJsonData returns undefined", () => {
+  test("should use an empty array and print 0 when loadJsonData returns undefined", () => {
     (loadJsonData as jest.Mock).mockReturnValueOnce({ data: undefined });
-    (traverseData as jest.Mock).mockReturnValue({ result1: 1 });
 
     console.log = jest.fn();
 
-    analyze(["analyze", "-depth", "2", "-verbose", "phrase"]);
+    analyze(["-depth", "2", "-verbose", "phrase"]);
+
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("\n0\n"));
+  });
+
+  test("handles large phrase correctly", () => {
+    const mockData = [{ name: "parent", items: [{ name: "child" }] }];
+    const phrase = "a".repeat(5000) + " child";
+
+    (loadJsonData as jest.Mock).mockReturnValueOnce({ data: mockData });
+
+    analyze(["-depth", "1", phrase]);
 
     expect(console.log).toHaveBeenCalledWith(
-      expect.stringContaining("result1 = 1;")
+      expect.stringContaining("parent = 1;")
     );
   });
 });

@@ -1,6 +1,5 @@
 import cli, { usageGuide } from "./cli";
 import analyze from "./controllers/analyze";
-import { jest } from "@jest/globals";
 
 jest.mock("./controllers/analyze", () => jest.fn());
 
