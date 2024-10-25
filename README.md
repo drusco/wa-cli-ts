@@ -30,7 +30,7 @@ bun run cli.ts analyze –depth <n> –verbose (optional) "{phrase}"
 
 ### Formato do JSON
 
-O arquivo dicts/data.json tem uma única propriedade chamada `**data**`, e essa propriedade é um `**Array<Item>**`
+O arquivo dicts/data.json tem uma única propriedade chamada `data`, e essa propriedade é um `Array<Item>`
 
 ```
 {
