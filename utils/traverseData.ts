@@ -1,19 +1,32 @@
 import type { Item } from "../types";
-import traverseDataRecursive from "./traverseDataRecursive";
 
 const traverseData = (
   items: Item[],
   depth: number,
-  phrase: string
+  phrase: string,
+  path: string[] = [],
+  results: Record<string, number> = {}
 ): Record<string, number> => {
-  const path: string[] = [];
-  const results: Record<string, number> = {};
+  const pathSize = path.length;
+  const phraseLowercase = phrase.toLowerCase();
 
-  if (items.length === 0) {
-    return results;
+  for (const item of items) {
+    const { name, items: children } = item;
+
+    if (pathSize >= depth && phraseLowercase.includes(name.toLowerCase())) {
+      const pathName = path[depth - 1];
+      if (pathName) {
+        results[pathName] = (results[pathName] || 0) + 1;
+      }
+    }
+
+    if (children && children.length > 0) {
+      const currentPath = [...path, name];
+      traverseData(children, depth, phrase, currentPath, results);
+    }
   }
 
-  return traverseDataRecursive(items, path, results, depth, phrase);
+  return results;
 };
 
 export default traverseData;

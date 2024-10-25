@@ -1,7 +1,7 @@
-import traverseDataRecursive from "./traverseDataRecursive";
+import traverseData from "./traverseData";
 import type { Item } from "../types";
 
-describe("traverseDataRecursive", () => {
+describe("traverseData", () => {
   const mockData: Item[] = [
     {
       name: "Animais",
@@ -45,7 +45,7 @@ describe("traverseDataRecursive", () => {
   test("should return results for matching items within the depth limit", () => {
     const phrase = "Eu amo papagaios";
     const depth = 2;
-    const results = traverseDataRecursive(mockData, [], {}, depth, phrase);
+    const results = traverseData(mockData, depth, phrase);
 
     expect(results).toEqual({
       Aves: 1,
@@ -55,7 +55,7 @@ describe("traverseDataRecursive", () => {
   test("should not match items beyond the given depth", () => {
     const phrase = "Eu tenho preferência por animais carnívoros";
     const depth = 5;
-    const results = traverseDataRecursive(mockData, [], {}, depth, phrase);
+    const results = traverseData(mockData, depth, phrase);
 
     expect(results).toEqual({});
   });
@@ -63,7 +63,7 @@ describe("traverseDataRecursive", () => {
   test("should correctly traverse nested items and count matches", () => {
     const phrase = "Eu vi gorilas e papagaios";
     const depth = 3;
-    const results = traverseDataRecursive(mockData, [], {}, depth, phrase);
+    const results = traverseData(mockData, depth, phrase);
 
     expect(results).toEqual({
       Pássaros: 1,
@@ -74,7 +74,7 @@ describe("traverseDataRecursive", () => {
   test("should match case-insensitive phrases", () => {
     const phrase = "Eu vi PAPAGAIOS";
     const depth = 3;
-    const results = traverseDataRecursive(mockData, [], {}, depth, phrase);
+    const results = traverseData(mockData, depth, phrase);
 
     expect(results).toEqual({
       Pássaros: 1,
