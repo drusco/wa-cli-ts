@@ -16,6 +16,14 @@ Este projeto foi criado usando bun init no bun v1.1.32. [Bun](https://bun.sh). P
 bun install
 ```
 
+### Testes unitários
+
+Para executar os tests unitários do Jest, use o seguinte comando
+
+```
+bun run test
+```
+
 ### Formato de entrada
 
 A aplicação usa a seguinte sintaxe.
