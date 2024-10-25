@@ -1,33 +1,36 @@
 import loadJsonData from "../utils/loadJsonData";
 import traverseData from "../utils/traverseData";
+import isValidArgName from "../utils/isValidArgName";
 
 const analyze = (args: string[]): void => {
   const startTime = Date.now();
+  const validArgs = ["depth", "verbose"];
+
   let depth = 1;
   let verbose = false;
   let phrase: string = "";
 
-  for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
+  for (const [index, arg] of args.entries()) {
+    if (!isValidArgName(arg, validArgs)) {
+      phrase = arg;
+      continue;
+    }
 
-    switch (arg) {
-      case "--depth":
-        if (i + 1 < args.length) {
-          const depthValue = args[++i];
-          depth = parseInt(depthValue, 10);
+    if (arg.endsWith("verbose")) {
+      verbose = true;
+    }
 
-          if (isNaN(depth)) {
-            console.error("Invalid --depth value.");
-            return;
-          }
-        }
-        break;
-      case "--verbose":
-        verbose = true;
-        break;
-      default:
-        phrase = arg;
-        break;
+    if (arg.endsWith("depth")) {
+      if (index + 1 === args.length) {
+        continue;
+      }
+      const depthValue = args[index + 1];
+      depth = parseInt(depthValue, 10);
+
+      if (isNaN(depth)) {
+        console.error("Invalid --depth value.");
+        continue;
+      }
     }
   }
 
