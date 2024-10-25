@@ -1,3 +1,5 @@
+import analyze from "./controllers/analyze";
+
 const VALID_ACTIONS = ["analyze"];
 
 async function app(): Promise<void> {
@@ -14,10 +16,8 @@ async function app(): Promise<void> {
   const actionArgs = args.slice(1);
 
   if (action === "analyze") {
-    await analyze(actionArgs);
+    analyze(actionArgs);
   }
 }
-
-async function analyze(args: string[]): Promise<void> {}
 
 app();
