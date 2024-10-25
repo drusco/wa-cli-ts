@@ -1,14 +1,20 @@
 import analyze from "./controllers/analyze";
+import trimLines from "./utils/trimLines";
 
 const VALID_ACTIONS = ["analyze"];
 
-async function app(): Promise<void> {
+function app(): void {
   const args = process.argv.slice(2);
 
   if (args.length === 0 || !VALID_ACTIONS.includes(args[0])) {
-    console.log(
-      'usage:\n\r\tanalyze --depth <n> --verbose (optional) "{phrase}"'
-    );
+    const usageGuide = trimLines(`
+      "${args[0]}" is not a valid CLI action.
+
+      Available actions:
+        - ${VALID_ACTIONS.join("\n - ")}
+    `);
+
+    console.log(usageGuide);
     return;
   }
 
