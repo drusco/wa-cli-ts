@@ -72,25 +72,28 @@ const analyze = (args: string[]): void => {
 
   const resultTime = Date.now() - resultStartTime;
 
-  console.log("");
-
   if (Object.keys(results).length === 0) {
-    console.log("0");
+    console.log("\n0\n");
   } else {
-    for (const [key, value] of Object.entries(results)) {
-      console.log(`${key} = ${value}; `);
-    }
+    const readableResults = Object.entries(results)
+      .map(([value, total]) => `${value} = ${total};`)
+      .join("\n");
+
+    console.log(
+      trimLines(`
+        ${readableResults}
+      `)
+    );
   }
 
   if (verbose) {
-    console.log("\n\r");
     console.log(
-      `Tempo de carregamento dos parâmetros`.padEnd(40) + `${paramsTime}ms`
+      trimLines(`
+      ${"Tempo de carregamento dos parâmetros".padEnd(40) + paramsTime}ms
+      ${"Tempo de verificação da frase".padEnd(40) + resultTime}ms
+      `)
     );
-    console.log(`Tempo de verificação da frase`.padEnd(40) + `${resultTime}ms`);
   }
-
-  console.log("\n\r");
 };
 
 export default analyze;
