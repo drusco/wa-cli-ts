@@ -22,8 +22,17 @@ const analyze = (args: string[]): void => {
 
   for (const [index, arg] of args.entries()) {
     if (!isValidArgName(arg, validArgs)) {
+      // current argument is not valid
+      if (
+        isValidArgName(
+          args[index - 1],
+          validArgs.filter((arg) => !["verbose"].includes(arg))
+        )
+      ) {
+        // this argument is a value for a previous valid argument
+        continue;
+      }
       phrase = arg;
-      continue;
     }
 
     if (arg.endsWith("verbose")) {
@@ -31,9 +40,6 @@ const analyze = (args: string[]): void => {
     }
 
     if (arg.endsWith("depth")) {
-      if (index + 1 === args.length) {
-        continue;
-      }
       const depthValue = args[index + 1];
       depth = parseInt(depthValue, 10);
 
