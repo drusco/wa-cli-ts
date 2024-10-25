@@ -1,12 +1,22 @@
 import loadJsonData from "../utils/loadJsonData";
 import traverseData from "../utils/traverseData";
 import isValidArgName from "../utils/isValidArgName";
+import trimLines from "../utils/trimLines";
+
+const usageGuide = trimLines(`
+  ${"-depth".padEnd(10)} integer
+  ${"-verbose".padEnd(10)} optional
+  ${'"phrase"'.padEnd(10)} string
+
+  example:
+  bun run cli.ts analyze -depth 2 -verbose "phrase"
+`);
 
 const analyze = (args: string[]): void => {
   const startTime = Date.now();
   const validArgs = ["depth", "verbose"];
 
-  let depth = 1;
+  let depth: number | undefined;
   let verbose = false;
   let phrase: string = "";
 
@@ -28,19 +38,28 @@ const analyze = (args: string[]): void => {
       depth = parseInt(depthValue, 10);
 
       if (isNaN(depth)) {
-        console.error("Invalid --depth value.");
-        continue;
+        console.error("Argument -depth is not a valid integer number.");
+        console.log(usageGuide);
+        return;
       }
     }
   }
 
+  if (depth === undefined) {
+    console.error("Argument -depth is required.");
+    console.log(usageGuide);
+    return;
+  }
+
   if (depth < 1) {
-    console.error("Argument --depth should not be less than 1.");
+    console.error("Argument -depth should not be less than 1.");
+    console.log(usageGuide);
     return;
   }
 
   if (!phrase) {
     console.error("Phrase is required.");
+    console.log(usageGuide);
     return;
   }
 

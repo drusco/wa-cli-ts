@@ -8,12 +8,11 @@ function app(): void {
 
   if (args.length === 0 || !VALID_ACTIONS.includes(args[0])) {
     const usageGuide = trimLines(`
-      "${args[0]}" is not a valid CLI action.
-
       Available actions:
         - ${VALID_ACTIONS.join("\n - ")}
     `);
 
+    console.error(`"${args[0]}" is not a valid CLI action.`);
     console.log(usageGuide);
     return;
   }
