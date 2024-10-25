@@ -9,6 +9,10 @@ const traverseData = (
   const path: string[] = [];
   const results: Record<string, number> = {};
 
+  if (items.length === 0) {
+    return results;
+  }
+
   return traverseDataRecursive(items, path, results, depth, phrase);
 };
 
